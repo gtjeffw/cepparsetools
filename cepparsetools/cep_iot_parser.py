@@ -74,7 +74,7 @@ class IoTTransformer(Transformer):
 # automatically _after_ a token is matched. The end result is that spaces in the interior
 # of token string sequences are preserved. This ends up being the behavior that we want!
 # Also, this is heavily based on the json example in the lark documentation
-cep_iot_parser = Lark(r'''
+cep_iot_parser_rules = r'''
     ?value: dict
           | list
           | string
@@ -108,7 +108,11 @@ cep_iot_parser = Lark(r'''
     %import common.WS
     %ignore WS
 
-    ''', start='value', parser='lalr', transformer=IoTTransformer())
+    '''
+
+cep_iot_parser = Lark(cep_iot_parser_rules, start='value', parser='lalr', transformer=IoTTransformer())
+cep_iot_tree_parser = Lark(cep_iot_parser_rules, start='value', parser='lalr')
+
 
 # Switch back to separate transformer and parse tree if more dev needs to be done
 # cep_iot_transformer = IoTTransformer()
@@ -129,20 +133,21 @@ if __name__ == "__main__":
     str3 = r'{stamp=1.647039603041E9, event=48, sunday=null, monday=null, tuesday=null, wednesday=null, thursday=null, friday=null, saturday=null, sequencenum=12, macaddress=000D6F00132B33CB, areaid=23, areaname=Kitchen 1, alarm1=false, alarm2=false, tamper=false, battery=false, superreports=true, restorereports=true, trouble=false, ac=false, weight=null, fatmass=null, watermass=null, bonemass=null, musclemass=null, batterylevel=null, from=null, to=null, duration=null, fromgmtoffset=null, durationinbed=null, durationawake=null, durationinsleep=null, durationinrem=null, durationinlight=null, durationindeep=null, durationsleeponset=null, durationbedexit=null, awakenings=null, bedexitcount=null, tossnturncount=null, avghr=null, minhr=null, maxhr=null, hrvscore=null, hrvlf=null, hrvhf=null, avgrr=null, minrr=null, maxrr=null, avgactivity=null, fmcount=null, sleepscore=null}'
     str4 = '{"key": ["item0", "item1", 3.14], "key2": true, tricky label: "bob", label2: tricky value}'
 
-    # text = str1
-    #
-    # tree = data_parser.parse(text)
-    #
-    # out = tree.pretty()
-    #
-    # print("parsed:")
-    # print(out)
-    #
-    #
-    # transform = cep_transformer.transform(tree)
-    #
-    # print("Transformer Example:")
-    # print(transform)
+    text = str1
+
+    my_transformer = IoTTransformer()
+    tree = cep_iot_tree_parser.parse(text)
+
+    out = tree.pretty()
+
+    print("parsed:")
+    print(out)
+
+
+    transform = my_transformer.transform(tree)
+
+    print("Transformer Example:")
+    print(transform)
 
     demo = cep_parse_iot(str0)
     print(demo)

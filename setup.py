@@ -11,9 +11,9 @@ setuptools.setup(
     description='CEP Data Parsing Tools',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/???/cepparsetools',
+    url='https://github.com/gtjeffw/cepparsetools',
     project_urls={
-        "Bug Tracker": "https://github.com/???/cepparsetools/issues"
+        "Bug Tracker": "https://github.com/gtjeffw/cepparsetools/issues"
     },
     license='MIT',
     packages=['cepparsetools'],

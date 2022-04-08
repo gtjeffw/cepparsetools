@@ -5,8 +5,9 @@ Right now, it provides a parser that converts AWS IoT Analytics data contained w
 
 ## Installation/Update
 
-> pip install git+https://github.com/????/cepparsetools
-
+```
+pip install git+https://github.com/gtjeffw/cepparsetools
+```
 ## Usage
 
 * cep_iot_parser

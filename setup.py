@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='cepparsetools',
-    version='0.0.1',
+    version='0.0.2',
     author='Jeff Wilson',
     author_email='jeff@imtc.gatech.edu',
     description='CEP Data Parsing Tools',
